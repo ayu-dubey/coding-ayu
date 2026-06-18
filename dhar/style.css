@@ -1,0 +1,200 @@
+/* 🌙 Dark background */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* 📦 Main container */
+.main {
+  width: 100%;
+  max-width: 600px;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* 🤖 Header */
+h1 {
+  text-align: center;
+  font-size: 22px;
+  margin: 10px 0;
+}
+
+/* 🤖 Robot image */
+.bot-img {
+  width: 80px;
+  margin: 10px auto;
+  display: block;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* 💬 Chat area */
+.chat-box {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 🔥 Scrollbar styling */
+.chat-box::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 10px;
+}
+
+/* 🧾 Messages */
+.message {
+  padding: 10px 14px;
+  border-radius: 14px;
+  max-width: 75%;
+  font-size: 14px;
+  line-height: 1.4;
+  animation: fadeIn 0.3s ease-in;
+}
+
+/* 👤 User message */
+.user {
+  background: #22c55e;
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+/* 🤖 Bot message */
+.bot {
+  background: #1e293b;
+  color: #e2e8f0;
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+
+/* ⌨️ Input area */
+.input-area {
+  display: flex;
+  align-items: center;
+  background: #1e293b;
+  border-radius: 30px;
+  padding: 6px;
+  margin: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+/* ✏️ Input field */
+input {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  outline: none;
+  border-radius: 30px;
+  background: transparent;
+  color: white;
+  font-size: 14px;
+}
+
+/* 🚀 Buttons */
+button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 50%;
+  background: #22c55e;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.2s;
+}
+
+/* 🧹 Clear button (second button) */
+button:nth-child(3) {
+  background: #ef4444;
+}
+
+button:nth-child(3):hover {
+  background: #dc2626;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+/* ✨ Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+/* 📱 App layout */
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+/* 📂 Sidebar */
+.sidebar {
+  width: 250px;
+  background: #020617;
+  color: white;
+  padding: 15px;
+  border-right: 1px solid #1e293b;
+}
+
+.sidebar h2 {
+  margin-bottom: 15px;
+}
+
+.sidebar button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #22c55e;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#chat-list {
+  margin-top: 10px;
+}
+
+/* 💬 Main chat */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* 📱 Mobile responsive */
+@media (max-width: 600px) {
+  .main {
+    height: 100vh;
+    padding: 10px;
+  }
+
+  .chat-box {
+    padding: 10px;
+  }
+}

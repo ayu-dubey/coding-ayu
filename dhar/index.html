@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Chatbot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="app">
+
+    <!-- 📂 Sidebar -->
+    <div class="sidebar">
+      <h2>💬 Chats</h2>
+      <button onclick="newChat()">➕ New Chat</button>
+      <div id="chat-list"></div>
+    </div>
+
+    <!-- 💬 Main Chat -->
+    <div class="main">
+      <div class="header">
+        <h2>🤖 AI Query Layout</h2>
+      </div>
+
+      <img src="https://static.vecteezy.com/system/resources/previews/071/433/877/non_2x/ai-chatbot-icon-a-friendly-robot-symbol-in-a-speech-bubble-for-digital-communication-png.png" class="bot-img">
+
+      <div id="chat-box" class="chat-box"></div>
+
+      <div class="input-area">
+        <input id="user-input" type="text" placeholder="Ask anything...">
+        
+        <!-- 📎 Upload -->
+        <label for="image-input" class="upload-btn">📎</label>
+        <input type="file" id="image-input" accept="image/*" hidden>
+
+        <button onclick="sendMessage()">➤</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
