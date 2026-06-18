@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Advanced Weather + Calendar App</title>
+
+<!-- LOGIN CHECK -->
+<script>
+if(localStorage.getItem("login") !== "true") {
+    window.location.href = "login.html";
+}
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.clock {
+    font-size: 18px;
+}
+
+/* DARK MODE */
+.dark {
+    background: #111;
+    color: white;
+}
+
+/* FOOTER */
+.footer {
+    margin-top: 30px;
+    padding: 10px;
+    text-align: center;
+}
+
+.note-box {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+
+<h1>🌤 Weather + Calendar App</h1>
+
+<div class="header-right">
+
+<div id="clock"></div>
+
+<button onclick="toggleTheme()">🌙</button>
+
+<button onclick="logout()">Logout</button>
+
+</div>
+
+</div>
+
+<!-- WELCOME -->
+<h3 id="welcomeUser"></h3>
+
+<div class="container">
+
+<!-- SEARCH -->
+<div class="search-box">
+
+<input type="text"
+id="cityInput"
+placeholder="Enter city name">
+
+<button onclick="getWeather()">Search</button>
+
+<button onclick="getLocation()">📍 My Location</button>
+
+<div class="quick-city">
+
+<button onclick="quickWeather('Delhi')">Delhi</button>
+
+<button onclick="quickWeather('Mumbai')">Mumbai</button>
+
+<button onclick="quickWeather('London')">London</button>
+
+<button onclick="quickWeather('Tokyo')">Tokyo</button>
+
+</div>
+
+</div>
+
+<!-- WEATHER -->
+<div id="weatherBox">
+
+<h2 id="cityName">City</h2>
+
+<img id="weatherIcon"
+style="width:80px; display:block; margin:auto;">
+
+<p id="temp">Temperature</p>
+
+<p id="desc">Description</p>
+
+<p id="humidity">Humidity</p>
+
+<p id="wind">Wind Speed</p>
+
+<p id="mood"></p>
+
+<p id="travel"></p>
+
+</div>
+
+<!-- FORECAST -->
+<div class="forecast-section">
+
+<h2>📅 Forecast</h2>
+
+<div id="forecast"></div>
+
+</div>
+
+<!-- CALENDAR -->
+<div class="calendar">
+
+<div class="nav">
+
+<button onclick="prevMonth()">⬅</button>
+
+<h2 id="monthYear"></h2>
+
+<button onclick="nextMonth()">➡</button>
+
+</div>
+
+<div id="calendarDays"></div>
+
+</div>
+
+<!-- SEARCH EVENT -->
+<div style="margin-top:20px; text-align:center;">
+
+<input type="text"
+placeholder="Search Event..."
+onkeyup="searchEvent(this.value)">
+
+<div id="searchResult"></div>
+
+</div>
+
+<!-- NOTES -->
+<div class="note-box">
+
+<h2>📝 Notes</h2>
+
+<textarea id="noteInput"
+placeholder="Write note..."></textarea>
+
+<button onclick="saveNote()">Save</button>
+
+<p id="savedNote"></p>
+
+</div>
+
+<!-- FEATURES -->
+<div class="extra-section">
+
+<h2>📊 Features</h2>
+
+<ul>
+
+<li>✔ Weather API</li>
+
+<li>✔ Location Weather</li>
+
+<li>✔ Forecast</li>
+
+<li>✔ Calendar</li>
+
+<li>✔ Notes</li>
+
+<li>✔ Login System</li>
+
+<li>✔ Dark Mode</li>
+
+<li>✔ Event Search</li>
+
+<li>✔ Event Count</li>
+
+</ul>
+
+</div>
+
+<!-- ABOUT -->
+<div class="about">
+
+<h2>📘 About</h2>
+
+<p>
+This project shows weather, calendar,
+and notes using JavaScript and API.
+</p>
+
+</div>
+
+<!-- EXTRA -->
+<div class="extra-section">
+
+<h2>📌 Extra Info</h2>
+
+<p>HTML + CSS + JS Project</p>
+
+<p>Uses OpenWeather API</p>
+
+<p>Responsive UI</p>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+
+<p>© Weather App Project</p>
+
+</div>
+
+<!-- MAIN SCRIPT -->
+<script>
+
+// LOGOUT
+function logout() {
+
+    localStorage.removeItem("login");
+
+    window.location.href = "login.html";
+}
+
+// DARK MODE
+function toggleTheme(){
+
+    document.body.classList.toggle("dark");
+}
+
+// USER
+let user = localStorage.getItem("user");
+
+if(user){
+
+    document.getElementById("welcomeUser").innerText =
+    "Welcome " + user;
+}
+
+// CLOCK
+function updateClock(){
+
+    let now = new Date();
+
+    document.getElementById("clock").innerText =
+    now.toLocaleTimeString();
+}
+
+setInterval(updateClock,1000);
+
+// SAVE NOTE
+function saveNote(){
+
+    let note =
+    document.getElementById("noteInput").value;
+
+    localStorage.setItem("note",note);
+
+    document.getElementById("savedNote").innerText =
+    note;
+
+    document.getElementById("noteInput").value = "";
+}
+
+// LOAD NOTE
+window.onload = function(){
+
+    let note = localStorage.getItem("note");
+
+    if(note){
+
+        document.getElementById("savedNote").innerText =
+        note;
+    }
+}
+
+</script>
+
+<script src="config.js"></script>
+
+<script src="script.js"></script>
+
+<script src="calendar.js"></script>
+
+</body>
+</html>

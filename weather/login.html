@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<title>Advanced Login System</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+
+/* ================= BODY ================= */
+
+body {
+
+    font-family: 'Poppins', sans-serif;
+
+    background-image:
+    url('https://wallpaperaccess.com/full/5651988.jpg');
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    height: 100vh;
+
+    margin: 0;
+
+    overflow: hidden;
+
+    transition: 0.3s;
+}
+
+/* ================= DARK MODE ================= */
+
+.dark {
+
+    background:
+    linear-gradient(135deg,#000000,#434343);
+}
+
+/* ================= CONTAINER ================= */
+
+.container {
+
+    width: 370px;
+
+    background: rgba(255,255,255,0.1);
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    backdrop-filter: blur(15px);
+
+    color: white;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* ================= TITLE ================= */
+
+h2 {
+
+    text-align: center;
+}
+
+/* ================= INPUT ================= */
+
+input {
+
+    width: 100%;
+
+    padding: 12px;
+
+    margin: 10px 0;
+
+    border-radius: 10px;
+
+    border: none;
+
+    outline: none;
+
+    box-sizing: border-box;
+}
+
+/* ================= BUTTON ================= */
+
+button {
+
+    width: 100%;
+
+    padding: 12px;
+
+    margin-top: 10px;
+
+    border-radius: 10px;
+
+    border: none;
+
+    background:
+    linear-gradient(45deg,#ff512f,#dd2476);
+
+    color: white;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+button:hover{
+
+    transform: scale(1.03);
+
+    box-shadow: 0 0 10px #ff4b91;
+}
+
+/* ================= LINKS ================= */
+
+.link {
+
+    text-align: center;
+
+    margin-top: 10px;
+
+    cursor: pointer;
+}
+
+.link:hover{
+
+    color: cyan;
+}
+
+/* ================= HIDDEN ================= */
+
+.hidden {
+
+    display: none;
+}
+
+/* ================= MESSAGE ================= */
+
+#msg {
+
+    text-align: center;
+
+    margin-top: 10px;
+
+    font-weight: bold;
+}
+
+/* ================= PASSWORD STRENGTH ================= */
+
+.strength {
+
+    font-size: 12px;
+
+    text-align: left;
+}
+
+/* ================= IMAGE ================= */
+
+.login-img{
+
+    display: block;
+
+    margin: auto;
+
+    width: 90px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- LOGIN -->
+<div id="loginForm">
+
+<img
+src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+class="login-img">
+
+<h2>🔐 Login</h2>
+
+<input
+type="text"
+id="loginUser"
+placeholder="Username">
+
+<input
+type="password"
+id="loginPass"
+placeholder="Password">
+
+<label>
+
+<input
+type="checkbox"
+id="remember"
+style="width:auto;">
+
+Remember Me
+
+</label>
+
+<button onclick="login()">
+
+Login
+
+</button>
+
+<button onclick="togglePassword()">
+
+👁 Show Password
+
+</button>
+
+<p class="link"
+onclick="showRegister()">
+
+Create Account
+
+</p>
+
+<p class="link"
+onclick="forgotPassword()">
+
+Forgot Password?
+
+</p>
+
+<p class="link"
+onclick="toggleTheme()">
+
+🌙 Toggle Theme
+
+</p>
+
+</div>
+
+<!-- REGISTER -->
+<div id="registerForm" class="hidden">
+
+<h2>📝 Register</h2>
+
+<input
+type="text"
+id="regUser"
+placeholder="Username">
+
+<input
+type="password"
+id="regPass"
+placeholder="Password"
+onkeyup="checkStrength()">
+
+<p class="strength"
+id="strengthText"></p>
+
+<button onclick="register()">
+
+Register
+
+</button>
+
+<p class="link"
+onclick="showLogin()">
+
+Back to Login
+
+</p>
+
+</div>
+
+<p id="msg"></p>
+
+</div>
+
+<script>
+
+// SHOW REGISTER
+function showRegister() {
+
+    document.getElementById("loginForm")
+    .classList.add("hidden");
+
+    document.getElementById("registerForm")
+    .classList.remove("hidden");
+}
+
+// SHOW LOGIN
+function showLogin() {
+
+    document.getElementById("registerForm")
+    .classList.add("hidden");
+
+    document.getElementById("loginForm")
+    .classList.remove("hidden");
+}
+
+// VALIDATION
+function validate(user, pass) {
+
+    if(user === "" || pass === ""){
+
+        return "Fill all fields";
+    }
+
+    if(pass.length < 4){
+
+        return "Password too short";
+    }
+
+    return "ok";
+}
+
+// PASSWORD STRENGTH
+function checkStrength() {
+
+    let pass =
+    document.getElementById("regPass").value;
+
+    let text =
+    document.getElementById("strengthText");
+
+    if(pass.length < 4){
+
+        text.innerText = "Weak";
+        text.style.color = "red";
+    }
+
+    else if(pass.length < 8){
+
+        text.innerText = "Medium";
+        text.style.color = "yellow";
+    }
+
+    else{
+
+        text.innerText = "Strong";
+        text.style.color = "lightgreen";
+    }
+}
+
+// REGISTER
+function register() {
+
+    let user =
+    document.getElementById("regUser").value;
+
+    let pass =
+    document.getElementById("regPass").value;
+
+    let check = validate(user, pass);
+
+    if(check !== "ok") {
+
+        showMsg(check, "yellow");
+
+        return;
+    }
+
+    localStorage.setItem("user", user);
+
+    localStorage.setItem("pass", pass);
+
+    showMsg("Account Created ✅", "lightgreen");
+
+    showLogin();
+}
+
+// LOGIN
+function login() {
+
+    let user =
+    document.getElementById("loginUser").value;
+
+    let pass =
+    document.getElementById("loginPass").value;
+
+    let savedUser =
+    localStorage.getItem("user");
+
+    let savedPass =
+    localStorage.getItem("pass");
+
+    if(user === savedUser &&
+       pass === savedPass){
+
+        localStorage.setItem("login", "true");
+
+        if(document.getElementById("remember").checked){
+
+            localStorage.setItem(
+            "rememberUser",
+            user
+            );
+        }
+
+        showMsg(
+        "Login Success ✅",
+        "lightgreen"
+        );
+
+        setTimeout(() => {
+
+            window.location.href =
+            "index.html";
+
+        }, 1000);
+    }
+
+    else{
+
+        showMsg(
+        "Wrong Credentials ❌",
+        "red"
+        );
+    }
+}
+
+// TOGGLE PASSWORD
+function togglePassword() {
+
+    let pass =
+    document.getElementById("loginPass");
+
+    pass.type =
+    pass.type === "password"
+    ? "text"
+    : "password";
+}
+
+// FORGOT PASSWORD
+function forgotPassword() {
+
+    let newPass =
+    prompt("Enter new password:");
+
+    if(newPass){
+
+        localStorage.setItem("pass", newPass);
+
+        alert("Password Updated");
+    }
+}
+
+// MESSAGE
+function showMsg(text, color) {
+
+    let msg =
+    document.getElementById("msg");
+
+    msg.innerText = text;
+
+    msg.style.color = color;
+}
+
+// THEME
+function toggleTheme() {
+
+    document.body.classList.toggle("dark");
+}
+
+// AUTO FILL
+window.onload = function() {
+
+    let saved =
+    localStorage.getItem("rememberUser");
+
+    if(saved){
+
+        document.getElementById("loginUser").value =
+        saved;
+    }
+}
+
+</script>
+
+</body>
+</html>
